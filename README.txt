@@ -1,7 +1,7 @@
 /brief:
 
  This small application shall provide a TCP server, which receives data
- from differents nodes (e.g. virtual CAN nodes) and transmits those
+ from different nodes (e.g. virtual CAN nodes) and transmits those
  message to all other nodes that are connected to this network.
 
  We will employ TCP/IP technology in order to be independent from e.g. 
@@ -20,5 +20,9 @@ pro_virtual_controller_bus_BERKELY_SOCKETS
  |------------------------------------------ pro : project identifier
 
 /structure:
- |-- test_virtual_controller_bus_BERKLEY_SOCKETS
  |-- pro_virtual_controller_bus_BERKELY_SOCKETS
+	"main project"
+ |-- test_virtual_controller_bus_BERKLEY_SOCKETS
+	"test code for this project"
+ |-- test_virtual_controller_bus_clients
+	"some test clients"

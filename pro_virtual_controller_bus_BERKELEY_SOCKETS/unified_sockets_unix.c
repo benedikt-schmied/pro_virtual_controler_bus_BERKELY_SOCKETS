@@ -11,15 +11,14 @@
 
 /* includes */
 #include <stdint.h>
-#include <sys/types.h>
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
 
 /* networking libraries */
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <iphlpapi.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 
 /* project's header file */
 #include "unified_sockets.h"
@@ -33,17 +32,11 @@ int unified_sockets__open(void)
 {
 	/* automatic variables */
 	int ret;
-	WSADATA wsaData;
 
 	/* executable statements */
 
-	/* initialize Winsock */
-	ret = WSAStartup(MAKEWORD(2,2), &wsaData);
-	if (ret == 0) {
-
-		/* create a socket */
-		ret = socket(AF_INET, SOCK_STREAM, 0);
-	}
+	/* create a socket */
+	ret = socket(AF_INET, SOCK_STREAM, 0);
 
 	/* prior of returning, make some debuggin output */
 	if (ret < 0) {
