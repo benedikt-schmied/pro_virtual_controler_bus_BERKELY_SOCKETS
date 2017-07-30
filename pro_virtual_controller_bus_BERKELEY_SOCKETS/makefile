@@ -4,7 +4,11 @@
 
 all: pro_virtual_controller_bus_BERKELY_SOCKETS
 
-pro_virtual_controller_bus_BERKELY_SOCKETS: main.o unified_sockets_unix.o
+clean:
+	rm pro_virtual_controller_bus_BERKELY_SOCKETS
+	rm main.o unified_sockets_unix.o queue.o
+
+pro_virtual_controller_bus_BERKELY_SOCKETS: main.o unified_sockets_unix.o queue.o
 	gcc -o $@ $^ -lpthread
 	
 %.o : %.c
