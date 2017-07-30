@@ -1,7 +1,7 @@
 /brief:
 
  This small application shall provide a TCP server, which receives data
- from differents nodes (e.g. virtual CAN nodes) and transmits those
+ from different nodes (e.g. virtual CAN nodes) and transmits those
  message to all other nodes that are connected to this network.
 
  We will employ TCP/IP technology in order to be independent from e.g. 
