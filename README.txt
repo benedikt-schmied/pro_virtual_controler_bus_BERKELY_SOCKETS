@@ -1,21 +1,24 @@
 /brief:
 
- A small spotlight, small enough to be mounted on space constraint places, comprising
- RGB leds and a power microcontroller, in order to control it via networking 
- technologies (Bluetooth LE).
+ This small application shall provide a TCP server, which receives data
+ from differents nodes (e.g. virtual CAN nodes) and transmits those
+ message to all other nodes that are connected to this network.
+
+ We will employ TCP/IP technology in order to be independent from e.g. 
+ CAN bus networks and additionally to be able to test on an abstract level.
+
+ This is just a short and quick solution to build this
+ litte test framework on windows as well as on linux.
+ Can be replaced in future with BOOST library
 
 /nomenclature:
 
-pro_event_light_a_mkI
- |      |       | |
- |      |       | |-- mkI  : mark one
- |      |       |---- a    : model A  
- |      |----- event_light : event light (project naming)
- |-------------------- pro : project identifier
+pro_virtual_controller_bus_BERKELY_SOCKETS
+ |             |                 | 
+ |             |                 |-- dependency  : dependencyBERKELY_SOCKETS
+ |             |--------- virtual controller bus : virtual controller bus (project nanming)
+ |------------------------------------------ pro : project identifier
 
 /structure:
- |-- _application_notes:
- |-- _datasheets:
- |-- _documentation:
- |-- library
- |-- pro_event_light_a_mkI
+ |-- test_virtual_controller_bus_BERKLEY_SOCKETS
+ |-- pro_virtual_controller_bus_BERKELY_SOCKETS
