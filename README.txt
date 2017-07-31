@@ -15,9 +15,9 @@
 
 pro_virtual_controller_bus_BERKELY_SOCKETS
  |             |                 | 
- |             |                 |-- dependency  : dependencyBERKELY_SOCKETS
- |             |--------- virtual controller bus : virtual controller bus (project nanming)
- |------------------------------------------ pro : project identifier
+ |             |                 |-- BERKELY_SOCKETS  : dependency
+ |             |-------------- virtual controller bus : project nanming
+ |--------------------------------.-------------- pro : project identifier
 
 /structure:
  |-- pro_virtual_controller_bus_BERKELY_SOCKETS

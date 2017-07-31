@@ -2,7 +2,7 @@
 # Created on: Jul 30, 2017
 #     Author: bensch
 
-PROJECTNAME = pro_virtual_controller_bus_BERKELY_SOCKETS
+PROJECTNAME = test_virtual_controller_bus_clients
 ARCHIVESUFFIX = .a 
 ARCHIVEPREFIX = lib
 EXECUTABLESUFFIX = 
@@ -12,10 +12,11 @@ all: $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX)
 
 clean:
 	rm $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX)
-	rm main.o queue.o
+	rm main.o
 
-$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o queue.o
+$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o
 	gcc -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS
 	
 %.o : %.c
 	gcc -c -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS $^
+	

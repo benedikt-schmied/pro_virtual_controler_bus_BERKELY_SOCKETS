@@ -1,4 +1,5 @@
 // client.c
+// https://computing.llnl.gov/tutorials/pthreads/
 
 /* standard libraries */
 #include <stdio.h>
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
     	/* automatic variables */
 
     	/* executable statements */
-    	ret = unified_sockest__connect(sd);
+    	ret = unified_sockets__connect(sd);
     	if (ret >= 0) {
 
     		/* automatic variables */
@@ -57,10 +58,10 @@ int main(int argc, char *argv[])
 
 				printf("write returns %i\n", unified_sockets__send(sd, buf, strlen(buf)));
 				memset(buf, 0x00, sizeof(buf));
-				int count = unified_sockest__recv(sd, buf, 1000);
+				int count = unified_sockets__recv(sd, buf, 1000);
 				printf("I'm %s, Got echo of %s from server\n", argv[1], buf);
 			}
     	}
     }
-	shutdown(sd, SD_BOTH);
+	shutdown(sd, 0);
 }

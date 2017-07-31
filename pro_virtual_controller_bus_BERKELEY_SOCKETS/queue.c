@@ -65,7 +65,7 @@ int queue__open(void)
 	/* executable statements */
 
 	/* first, allocate memory required for the queuing structure */
-	s_queue = (struct queue_attr *)malloc(sizeof(struct queue_attr));
+	s_queue = (struct queue_attr *)malloc(sizeof(struct queue__attr));
 	if (s_queue) {
 
 		/* automatic variables */
@@ -123,7 +123,7 @@ int queue__add_to(int _sd, char *_p, int _len)
 	}
 
 	/* allocate the memory */
-	item = (struct item__attr *)malloc(sizeof(struct imte__attr));
+	item = (struct item__attr *)malloc(sizeof(struct item__attr));
 
 	/* check whether we've received enough memory */
 	if (item) {
