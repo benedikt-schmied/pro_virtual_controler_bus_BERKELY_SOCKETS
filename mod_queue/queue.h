@@ -44,7 +44,7 @@ int queue__add_to(int _sd, char *_p, int _len);
   \param [out]      *_len    address of length of data
   \return    socket descriptor [>=0] if successful
  */
-int queue__remove_from(int _sd, char **_p, int *_len);
+int queue__remove_from(int *_sd, char **_p, int *_len);
 
 
 #endif /* PRO_VIRTUAL_CONTROLLER_BUS_BERKELEY_SOCKETS_QUEUE_H_ */

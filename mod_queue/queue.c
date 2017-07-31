@@ -14,6 +14,7 @@
 /* standard includes */
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* threading component */
 #include <pthread.h>
@@ -65,7 +66,7 @@ int queue__open(void)
     /* executable statements */
 
     /* first, allocate memory required for the queuing structure */
-    s_queue = (struct queue_attr *)malloc(sizeof(struct queue__attr));
+    s_queue = (struct queue__attr *)malloc(sizeof(struct queue__attr));
     if (s_queue) {
 
         /* automatic variables */
@@ -75,6 +76,9 @@ int queue__open(void)
 
         /* initialize the queue */
         s_queue->list = (struct list__attr *)malloc(sizeof(struct list__attr));
+
+        /* mark this list as being empty */
+        s_queue->list->item = NULL;
 
         /* initialize the attributes for the mutex (part of the list) */
         pthread_mutexattr_init(&mattr);
@@ -135,6 +139,12 @@ int queue__add_to(int _sd, char *_p, int _len)
         /* check, whether we've got enough */
         if (item->payload) {
             memcpy(item->payload, _p, _len);
+
+            /* copy the length ... */
+            item->len = _len;
+
+            /* ... and descriptor */
+            item->sd = _sd;
         }
     }
 
@@ -157,8 +167,14 @@ int queue__add_to(int _sd, char *_p, int _len)
             iter = iter->next;
         } /* end of while - loop - statement */
 
-        /* we've reached the end */
-        iter->next = item;
+        /* check, whether we've got the first element */
+        if (iter == NULL) {
+            s_queue->list->item = item;
+        } else {
+
+            /* we've reached the end */
+            iter->next = item;
+        }
     }
 
     pthread_mutex_unlock(&s_queue->list->mtx);
@@ -170,16 +186,22 @@ int queue__add_to(int _sd, char *_p, int _len)
 
 /*!
   \brief add to the tail of a queue
-  \param []     _sd        socket descriptor
-  \param [out]     **_p    address of the payload pointer
-  \param [out]    *_len    address of length of data
+  \param []     *_sd        socket descriptor
+  \param [out]  **_p    address of the payload pointer
+  \param [out]  *_len    address of length of data
   \return    socket descriptor [>=0] if successful
  */
-int queue__remove_from(int _sd, char **_p, int *_len)
+int queue__remove_from(int *_sd, char **_p, int *_len)
 {
     /* automatic variables */
+    struct item__attr *item;
 
     /* executable statements */
+
+    /* check the functions' arguments */
+    if (_p == NULL || _len < 0) {
+        return -1;
+    }
 
     /* wait on the writer context to give us a message */
     sem_wait(&s_queue->sem);
@@ -187,9 +209,36 @@ int queue__remove_from(int _sd, char **_p, int *_len)
     pthread_mutex_lock(&s_queue->list->mtx);
 
     /* take the first item's address, and take
-          the second item's address to mark the start of
-          the list */
+      the second item's address to mark the start of
+      the list */
+    item = s_queue->list->item;
 
+    /* check, whether the given item is valid */
+    if (item) {
+
+        /* check, whether this was the last item */
+        if (item->next == item) { /* yes */
+
+            /* set the anchor to 'NULL' */
+            s_queue->list->item = NULL;
+        } else {
+            s_queue->list->item = item->next;
+        }
+    }
     pthread_mutex_unlock(&s_queue->list->mtx);
-    return 0;
+
+    if (item) {
+
+        /* return the values */
+        *_p     = item->payload;
+        *_len   = item->len;
+        *_sd    = item->sd;
+        return 0;
+    } else {
+        *_p     = NULL;
+        *_len   = 0;
+        *_sd    = 0;
+        return -1;
+    }
+
 }

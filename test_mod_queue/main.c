@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <queue.h>
 
@@ -60,6 +61,72 @@ void test_close(void) {
     return;
 }
 
+void test_add_to(void) {
+
+    /* automatic variables */
+    int ret;
+    char *p;
+    const int len = 30;
+
+    /* executable statements */
+
+    /* add to queue (illegal parameters) */
+    ret = queue__add_to(0, NULL, 0);
+    M_TEST_QUEUE__ASSERT_INT(-1, ret);
+
+    /* malloc some storage */
+    p = malloc(30);
+    memset(p, 0x5A, len);
+
+    /* now, actually add to queue */
+    ret = queue__add_to(0, p, len);
+    M_TEST_QUEUE__ASSERT_INT(0, ret);
+
+    free(p);
+
+    p = malloc(30);
+    memset(p, 0x55, len);
+
+    ret = queue__add_to(0, p, len);
+    M_TEST_QUEUE__ASSERT_INT(0, ret);
+
+    free(p);
+    return;
+}
+
+
+void test_remove_from(void) {
+
+    /* automatic variables */
+    int ret, icnt, sd;
+    char *p;
+    int len;
+
+    /* executable statements */
+
+    /* open the queue  */
+    ret = queue__remove_from(0, NULL, NULL);
+    M_TEST_QUEUE__ASSERT_INT(-1, ret);
+
+    ret = queue__remove_from(&sd, &p, &len);
+    M_TEST_QUEUE__ASSERT_INT(0, ret);
+
+    for (icnt = 0; icnt < len; icnt++) {
+            M_TEST_QUEUE__ASSERT_INT(0x5A, *(p + icnt));
+    }
+
+    free(p);
+
+    ret = queue__remove_from(&sd, &p, &len);
+    M_TEST_QUEUE__ASSERT_INT(0, ret);
+
+    for (icnt = 0; icnt < len; icnt++) {
+        M_TEST_QUEUE__ASSERT_INT(0x55, *(p + icnt));
+    }
+
+    return;
+}
+
 int main(int argc, char *argv[])
 {
     /* automatic variables */
@@ -68,6 +135,14 @@ int main(int argc, char *argv[])
             {"test_open", test_open},
             {"test_close", test_close},
             {"test_open", test_open},
+            {"test_close", test_close},
+            {"test_open", test_open},
+            {"test_add_to", test_add_to},
+            {"test_remove_from", test_remove_from},
+            {"test_add_to", test_add_to},
+            {"test_remove_from", test_remove_from},
+            {"test_add_to", test_add_to},
+            {"test_remove_from", test_remove_from},
             {"test_close", test_close},
     };
 
