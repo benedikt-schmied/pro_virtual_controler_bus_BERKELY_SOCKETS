@@ -2,7 +2,7 @@
 # Created on: Jul 30, 2017
 #     Author: bensch
 
-PROJECTNAME = pro_virtual_controller_bus_BERKELEY_SOCKETS
+PROJECTNAME = test_mod_queue
 ARCHIVESUFFIX = .a 
 ARCHIVEPREFIX = lib
 EXECUTABLESUFFIX = 
@@ -15,7 +15,7 @@ clean:
 	rm main.o
 
 $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o
-	gcc  -g -O0 -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS -lmod_queue -L../mod_queue
+	gcc  -g -O0 -o $@ $^ -lpthread -lmod_queue -L../mod_queue -lmod_queue -L../mod_queue
 	
 %.o : %.c
-	gcc -c -g -O0 -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS $^
+	gcc -c -g -O0 -o $@ -I. -I../mod_queue $^

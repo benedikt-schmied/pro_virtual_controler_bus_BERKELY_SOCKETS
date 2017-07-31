@@ -16,33 +16,33 @@
 
 /*!
   \brief opens a queue
-  \param [] 	void
-  \return	socket descriptor [>=0] if successful
+  \param []     void
+  \return    socket descriptor [>=0] if successful
  */
 int queue__open(void);
 
 /*!
   \brief opens a queue
-  \param [] 	void
-  \return	socket descriptor [>=0] if successful
+  \param []     void
+  \return    socket descriptor [>=0] if successful
  */
 int queue__close(void);
 
 /*!
   \brief add to the tail of a queue
-  \param [] 	_sd		socket descriptor
-  \param [in] 	*_p		payload
-  \param []		_len	length of data
-  \return	socket descriptor [>=0] if successful
+  \param []     _sd     socket descriptor
+  \param [in]   *_p     payload
+  \param []     _len    length of data
+  \return    socket descriptor [>=0] if successful
  */
 int queue__add_to(int _sd, char *_p, int _len);
 
 /*!
   \brief add to the tail of a queue
-  \param [] 	_sd		socket descriptor
-  \param [out] 	**_p	address of the payload pointer
-  \param [out]	*_len	address of length of data
-  \return	socket descriptor [>=0] if successful
+  \param []         _sd        socket descriptor
+  \param [out]      **_p    address of the payload pointer
+  \param [out]      *_len    address of length of data
+  \return    socket descriptor [>=0] if successful
  */
 int queue__remove_from(int _sd, char **_p, int *_len);
 

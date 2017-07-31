@@ -31,206 +31,206 @@
 */
 int unified_sockets__open(void)
 {
-	/* automatic variables */
-	int ret;
-	WSADATA wsaData;
+    /* automatic variables */
+    int ret;
+    WSADATA wsaData;
 
-	/* executable statements */
+    /* executable statements */
 
-	/* initialize Winsock */
-	ret = WSAStartup(MAKEWORD(2,2), &wsaData);
-	if (ret == 0) {
+    /* initialize Winsock */
+    ret = WSAStartup(MAKEWORD(2,2), &wsaData);
+    if (ret == 0) {
 
-		/* create a socket */
-		ret = socket(AF_INET, SOCK_STREAM, 0);
-	}
+        /* create a socket */
+        ret = socket(AF_INET, SOCK_STREAM, 0);
+    }
 
-	/* prior of returning, make some debuggin output */
-	if (ret < 0) {
-		printf("WSAStartup failed: %d\n", ret);
-	} else {
-		printf("socket successfully opened");
-	}
+    /* prior of returning, make some debuggin output */
+    if (ret < 0) {
+        printf("WSAStartup failed: %d\n", ret);
+    } else {
+        printf("socket successfully opened");
+    }
 
-	/* return the 'ret' variable which may contain the
-	 	 socket descriptor */
-	return ret;
+    /* return the 'ret' variable which may contain the
+          socket descriptor */
+    return ret;
 }
 
 /*!
   \brief connects to a socket
-  \param []		_sd		socket descriptor
+  \param []        _sd        socket descriptor
   \return successful if equal zero
  */
 int unified_sockets__connect(int _sd)
 {
-	/* automatic variables */
-	int ret;
-	struct sockaddr_in serv_addr;
-	uint16_t portno;
+    /* automatic variables */
+    int ret;
+    struct sockaddr_in serv_addr;
+    uint16_t portno;
 
-	/* executable statements */
+    /* executable statements */
 
-	/* clear address structure */
-	memset((char *) &serv_addr, 0x00, sizeof(serv_addr));
+    /* clear address structure */
+    memset((char *) &serv_addr, 0x00, sizeof(serv_addr));
 
-	/* setup the host_addr structure for use in bind call */
-	serv_addr.sin_family = AF_INET;
+    /* setup the host_addr structure for use in bind call */
+    serv_addr.sin_family = AF_INET;
 
-	/* automatically be filled with current host's IP address */
-	serv_addr.sin_addr.s_addr = inet_addr(M_TEST__IP_ADDR);;
+    /* automatically be filled with current host's IP address */
+    serv_addr.sin_addr.s_addr = inet_addr(M_TEST__IP_ADDR);;
 
-	/* assign the port number */
-	portno = M_TEST__PORT_NUMBER;
+    /* assign the port number */
+    portno = M_TEST__PORT_NUMBER;
 
-	/* push it into the structure */
-	serv_addr.sin_port = htons(M_TEST__PORT_NUMBER);
+    /* push it into the structure */
+    serv_addr.sin_port = htons(M_TEST__PORT_NUMBER);
 
-	/* executable statements */
-	ret = connect(_sd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
-	switch (ret) {
-	case 0:
-		break;
-	default:
-		printf("error on connecting %i", ret);
-		ret = -1;
-		break;
-	}
-	return ret;
+    /* executable statements */
+    ret = connect(_sd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
+    switch (ret) {
+    case 0:
+        break;
+    default:
+        printf("error on connecting %i", ret);
+        ret = -1;
+        break;
+    }
+    return ret;
 }
 
 /*!
   \brief receives from a socket
-  \param []		_sd		socket descriptor
-  \param [in]	*_p		buffer
-  \param []		_len	(maximum) length of buffer
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    (maximum) length of buffer
   \return successful if equal zero
  */
 int unified_sockets__bind(int _sd)
 {
-	/* automatic variables */
-	int ret;
-	struct sockaddr_in serv_addr;
-	uint16_t portno;
+    /* automatic variables */
+    int ret;
+    struct sockaddr_in serv_addr;
+    uint16_t portno;
 
-	/* executable statements */
+    /* executable statements */
 
-	/* clear address structure */
-	memset((char *) &serv_addr, 0x00, sizeof(serv_addr));
+    /* clear address structure */
+    memset((char *) &serv_addr, 0x00, sizeof(serv_addr));
 
-	/* setup the host_addr structure for use in bind call */
-	serv_addr.sin_family = AF_INET;
+    /* setup the host_addr structure for use in bind call */
+    serv_addr.sin_family = AF_INET;
 
-	// automatically be filled with current host's IP address
-	serv_addr.sin_addr.s_addr = inet_addr(M_TEST__IP_ADDR);;
+    // automatically be filled with current host's IP address
+    serv_addr.sin_addr.s_addr = inet_addr(M_TEST__IP_ADDR);;
 
-	/* assign the port number */
-	portno = M_TEST__PORT_NUMBER;
+    /* assign the port number */
+    portno = M_TEST__PORT_NUMBER;
 
-	/* push it into the structure */
-	serv_addr.sin_port = htons(M_TEST__PORT_NUMBER);
+    /* push it into the structure */
+    serv_addr.sin_port = htons(M_TEST__PORT_NUMBER);
 
-	// This bind() call will bind  the socket to the current IP address on port
-	ret = bind(_sd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-	switch (ret) {
-	case 0:
-		break;
-	default:
-		printf("error on binding %i", ret);
-		ret = -1;
-		break;
-	}
-	return ret;
+    // This bind() call will bind  the socket to the current IP address on port
+    ret = bind(_sd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+    switch (ret) {
+    case 0:
+        break;
+    default:
+        printf("error on binding %i", ret);
+        ret = -1;
+        break;
+    }
+    return ret;
 }
 
 /*!
   \brief receives from a socket
-  \param []		_sd		socket descriptor
+  \param []        _sd        socket descriptor
   \return new socket descriptor if successful [>0]
  */
 int unified_sockets__listen(int _sd)
 {
-	/* automatic variables */
-	int ret;
+    /* automatic variables */
+    int ret;
 
-	/* executable statements */
-	ret = listen(_sd, 30);
-	switch (ret) {
-	case 0:
-		break;
-	default:
-		ret = -1;
-		break;
-	}
-	return ret;
+    /* executable statements */
+    ret = listen(_sd, 30);
+    switch (ret) {
+    case 0:
+        break;
+    default:
+        ret = -1;
+        break;
+    }
+    return ret;
 }
 
 /*!
   \brief receives from a socket
-  \param []		_sd		socket descriptor
-  \param [in]	*_p		buffer
-  \param []		_len	(maximum) length of buffer
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    (maximum) length of buffer
   \return new socket descriptor if successful [>0]
  */
 int unified_sockets__accept(int _sd)
 {
-	/* automatic variables */
-	int ret;
-	struct sockaddr_in cli_addr;
-	int len;
+    /* automatic variables */
+    int ret;
+    struct sockaddr_in cli_addr;
+    int len;
 
-	/* executable statements */
+    /* executable statements */
 
-	len = sizeof(cli_addr);
-	ret = accept(_sd, (struct sockaddr *)&cli_addr, &len);
-	if (ret >= 0) {
-		;
-	} else {
-		ret = -1;
-	}
-	return ret;
+    len = sizeof(cli_addr);
+    ret = accept(_sd, (struct sockaddr *)&cli_addr, &len);
+    if (ret >= 0) {
+        ;
+    } else {
+        ret = -1;
+    }
+    return ret;
 }
 
 /*!
   \brief sends to a socket
-  \param []		_sd		socket descriptor
-  \param [in]	*_p		buffer
-  \param []		_len	effective length of buffer
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    effective length of buffer
   \return successful if equal zero
  */
 int unified_sockets__send(int _sd, char *_p, int _len)
 {
-	/* automatic variables */
-	int ret;
+    /* automatic variables */
+    int ret;
 
-	/* executable statements */
-	ret = send(_sd, _p, _len, 0);
-	if (ret >= 0) {
-		;
-	} else {
-		ret = -1;
-	}
-	return ret;
+    /* executable statements */
+    ret = send(_sd, _p, _len, 0);
+    if (ret >= 0) {
+        ;
+    } else {
+        ret = -1;
+    }
+    return ret;
 }
 
 /*!
   \brief receives from a socket
-  \param []		_sd		socket descriptor
-  \param [in]	*_p		buffer
-  \param []		_len	(maximum) length of buffer
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    (maximum) length of buffer
   \return successful if equal zero
  */
 int unified_sockets__recv(int _sd, char *_p, int _len)
 {
-	/* automatic variables */
-	int ret;
+    /* automatic variables */
+    int ret;
 
-	/* executable statements */
-	ret = recv(_sd, _p, _len, 0);
-	if (ret >= 0) {
-		;
-	} else {
-		ret = -1;
-	}
-	return ret;
+    /* executable statements */
+    ret = recv(_sd, _p, _len, 0);
+    if (ret >= 0) {
+        ;
+    } else {
+        ret = -1;
+    }
+    return ret;
 }

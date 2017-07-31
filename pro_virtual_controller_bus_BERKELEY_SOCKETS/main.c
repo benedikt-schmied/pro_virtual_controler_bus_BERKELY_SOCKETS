@@ -20,9 +20,9 @@ void error(const char *msg)
 
 void* echo(void* param)
 {
-	/* automatic variables */
+    /* automatic variables */
     int s = (int)param;
-	char buf[1024];
+    char buf[1024];
     int count;
     unsigned long mode = 0;
 
@@ -36,14 +36,14 @@ void* echo(void* param)
 
     while (count >= 0) {
 
-    	printf("Server received %s\n", buf);
+        printf("Server received %s\n", buf);
         printf("Server sending it back\n");
         unified_sockets__send(s, buf, strlen(buf));
 
         count = unified_sockets__recv(s, buf, 1000);
     }
     if (count < 0) {
-    	printf("recv error: %s\n", strerror(errno));
+        printf("recv error: %s\n", strerror(errno));
     }
 
 
@@ -54,26 +54,26 @@ void* echo(void* param)
 
 int echo_sync(int _fd)
 {
-	/* automatic variables */
-	char buf[1024];
+    /* automatic variables */
+    char buf[1024];
     int count;
     unsigned long mode = 0;
 
-	/* executable statements */
+    /* executable statements */
 
     count = unified_sockets__recv(_fd, buf, 1000);
     printf("count %i and file descriptor %i\n", count, _fd);
 
     while (count >= 0) {
 
-    	printf("Server received %s\n", buf);
+        printf("Server received %s\n", buf);
         printf("Server sending it back\n");
         unified_sockets__send(_fd, buf, strlen(buf));
 
         count = unified_sockets__recv(_fd, buf, 1000);
     }
     if (count < 0) {
-    	printf("recv error: %s\n", strerror(errno));
+        printf("recv error: %s\n", strerror(errno));
     }
     printf("closing connection\n");
 
@@ -82,30 +82,30 @@ int echo_sync(int _fd)
 
 int main(int argc, char *argv[])
 {
-	/* automatic variables */
-	int sd, newsd, ret, len;
+    /* automatic variables */
+    int sd, newsd, ret, len;
 
-	printf("starting server\n");
+    printf("starting server\n");
 
-	/* executable statements */
-	sd = unified_sockets__open();
-	if (sd >= 0) {
+    /* executable statements */
+    sd = unified_sockets__open();
+    if (sd >= 0) {
 
-		/* bind on port */
-		unified_sockets__bind(sd);
+        /* bind on port */
+        unified_sockets__bind(sd);
 
-		/* listen */
-		unified_sockets__listen(sd);
+        /* listen */
+        unified_sockets__listen(sd);
 
-		/* accept incoming connection */
-		newsd = unified_sockets__accept(sd);
+        /* accept incoming connection */
+        newsd = unified_sockets__accept(sd);
 
-		/* check, whehter it is equal or larger zero */
-		while (newsd) {
-			pthread_t t;
-			pthread_create(&t, 0, echo, (void*)newsd);
-			newsd = unified_sockets__accept(sd);
-		} /* end of while - loop - statement */
-	 }
-	return 0;
+        /* check, whehter it is equal or larger zero */
+        while (newsd) {
+            pthread_t t;
+            pthread_create(&t, 0, echo, (void*)newsd);
+            newsd = unified_sockets__accept(sd);
+        } /* end of while - loop - statement */
+     }
+    return 0;
 }
