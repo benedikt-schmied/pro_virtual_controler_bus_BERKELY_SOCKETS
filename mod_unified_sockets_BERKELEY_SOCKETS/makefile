@@ -17,5 +17,5 @@ $(ARCHIVEPREFIX)$(PROJECTNAME)$(ARCHIVESUFFIX): unified_sockets_unix.o
 	ar -q -o $@ $^
 	
 %.o : %.c
-	gcc -c -o $@ -I. $^
+	gcc  -g -O0 -c -o $@ -I. $^
 	

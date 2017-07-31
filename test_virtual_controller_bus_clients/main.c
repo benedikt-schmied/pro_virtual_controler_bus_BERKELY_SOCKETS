@@ -21,6 +21,14 @@ void error(const char *msg)
     exit(0);
 }
 
+/*!
+  \brief starts a test client
+  \param [] 	argc 	number of arguments
+  \param [in]	*argv[]	list of pointers to the arguments
+  	  	  	  	  	  	  note that the first argument is
+  	  	  	  	  	  	  the function name
+  \return	0
+ */
 int main(int argc, char *argv[])
 {
 	/* automatic variables */
@@ -29,6 +37,8 @@ int main(int argc, char *argv[])
     /* executable statements */
 
     sd = unified_sockets__open();
+
+    /* check whether the returned socket is valid */
     if (sd) {
 
     	/* automatic variables */
@@ -40,16 +50,27 @@ int main(int argc, char *argv[])
     		/* automatic variables */
 			unsigned cnt;
 			int len;
+			char buf[1024];
 
 			/* executable statements */
+
+			/* debugging message */
 			printf("Client sending 'hello server!' to server\n");
-			char buf[1024];
+
+			/* memset the entire buffer on stack */
 			memset(buf, 0x00, sizeof(buf));
+
+			/* transfer the test string onto it */
 			strncpy(buf, "test!\0", 20);
+
+			/* now calculate the test string */
 			len = strlen(buf);
+
+			/* additionally, add the instance number onto it */
 			snprintf(buf + len, sizeof(buf) - len, " instance %s", argv[1]);
 			printf("%s\n", buf);
 
+			/* start a loop for sending our messages */
 			for (cnt = 0; cnt < 10; cnt++) {
 
 				/* automatic variables */
@@ -60,7 +81,7 @@ int main(int argc, char *argv[])
 				memset(buf, 0x00, sizeof(buf));
 				int count = unified_sockets__recv(sd, buf, 1000);
 				printf("I'm %s, Got echo of %s from server\n", argv[1], buf);
-			}
+			} /* end of for - loop - statement */
     	}
     }
 	shutdown(sd, 0);

@@ -85,6 +85,8 @@ int main(int argc, char *argv[])
 	/* automatic variables */
 	int sd, newsd, ret, len;
 
+	printf("starting server\n");
+
 	/* executable statements */
 	sd = unified_sockets__open();
 	if (sd >= 0) {

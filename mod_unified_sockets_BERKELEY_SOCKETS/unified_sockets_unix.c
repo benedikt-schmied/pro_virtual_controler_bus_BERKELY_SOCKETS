@@ -40,9 +40,9 @@ int unified_sockets__open(void)
 
 	/* prior of returning, make some debuggin output */
 	if (ret < 0) {
-		printf("WSAStartup failed: %d\n", ret);
+		printf("socket successfully opened: %d\n", ret);
 	} else {
-		printf("socket successfully opened");
+		printf("socket successfully opened\n");
 	}
 
 	/* return the 'ret' variable which may contain the
@@ -85,7 +85,7 @@ int unified_sockets__connect(int _sd)
 	case 0:
 		break;
 	default:
-		printf("error on connecting %i", ret);
+		printf("error on connecting %i\n", ret);
 		ret = -1;
 		break;
 	}
@@ -129,7 +129,7 @@ int unified_sockets__bind(int _sd)
 	case 0:
 		break;
 	default:
-		printf("error on binding %i", ret);
+		printf("error on binding %i\n", ret);
 		ret = -1;
 		break;
 	}

@@ -15,8 +15,8 @@ clean:
 	rm main.o
 
 $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o
-	gcc -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS
+	gcc -g -O0 -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS
 	
 %.o : %.c
-	gcc -c -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS $^
+	gcc -g -O0 -c -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS $^
 	
