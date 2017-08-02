@@ -18,4 +18,4 @@ $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): $(PROJECTNAME).o
 	gcc  -g -O0 -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS -lmod_queue -L../mod_queue
 	
 %.o : %.c
-	gcc -c -g -O0 -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS $^
+	gcc -c -g -O0 -o $@ -I. -I../mod_unified_sockets_BERKELEY_SOCKETS -I../mod_queue $^

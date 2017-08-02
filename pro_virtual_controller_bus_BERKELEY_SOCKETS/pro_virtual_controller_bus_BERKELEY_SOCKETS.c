@@ -13,10 +13,63 @@
 #include <unified_sockets.h>
 #include <queue.h>
 
+/* static variable which holds all currently used descriptors */
+static int s_pro_virtual_controller_bus_sd_tab[100] = {0};
+
+/* points the the first empty entry */
+static int *s_pro_virtual_controller_bus_sd_ptr = s_pro_virtual_controller_bus_sd_tab;
+
 void error(const char *msg)
 {
     perror(msg);
     exit(1);
+}
+
+/*!
+  \brief push descriptor
+  \param []     void
+  \return    socket descriptor [>=0] if successful
+ */
+void push_descriptor(int _sd)
+{
+    /* automatic variables */
+    int s;
+    int *indic;
+
+    /* executable statements */
+    for (indic = s_pro_virtual_controller_bus_sd_tab; indic < s_pro_virtual_controller_bus_sd_ptr; indic++) {
+
+        /* check, whether we already have fetched this socket descriptor */
+        if (*indic == _sd) {
+            return;
+        }
+    }
+
+    /* we've came up to this stage, hence, the entry is missing, now
+         search for a free entry */
+
+    if (s_pro_virtual_controller_bus_sd_ptr != s_pro_virtual_controller_bus_sd_tab + sizeof(s_pro_virtual_controller_bus_sd_tab) / sizeof(*s_pro_virtual_controller_bus_sd_tab)) {
+
+        /* push it onto the next free item */
+        *s_pro_virtual_controller_bus_sd_ptr = _sd;
+
+        /* move the pointer to the next empty item */
+        s_pro_virtual_controller_bus_sd_ptr++;
+    }
+    return;
+}
+
+/*!
+  \brief pop descriptor
+  \param []     void
+  \return    socket descriptor [>=0] if successful
+ */
+void pop_descriptor(int _sd)
+{
+    /* automatic variables */
+    int s;
+
+    /* executable statements */
 }
 
 /*!
@@ -34,16 +87,18 @@ void* treat_incoming_message(void* param)
 
     /* executable statements */
 
-    pthread_detach(pthread_self());
+//    pthread_detach(pthread_self());
     printf("starting echo thread\n");
 
     count = unified_sockets__recv(s, buf, 1024);
     printf("count %i and file descriptor %i\n", count, s);
 
-    while (count >= 0) {
+    while (count > 0) {
 
         /* push the message into the buffer */
         queue__add_to(s, buf, count);
+
+        printf("Server received %s\n", buf);
 
         count = unified_sockets__recv(s, buf, 1000);
     }
@@ -104,7 +159,30 @@ void *broadcasting_messages(void *_p) {
     ret = queue__remove_from(&sd, &p, &len);
     while (ret >= 0) {
 
-        /*  */
+        /* automatic variables */
+        int *indic;
+
+        /* executable statements */
+
+        /* now, look into the list of descriptors and send this message
+             to all other peers (sockets) */
+        for (indic = s_pro_virtual_controller_bus_sd_tab; indic < s_pro_virtual_controller_bus_sd_ptr; indic++) {
+
+            /* if the current entry is equal the senders's socket descriptor,
+                 continue the loop */
+            if (*indic == sd) {
+                continue;
+            }
+
+            /* at this stage, send the message */
+            unified_sockets__send(*indic, p, len);
+
+        } /* end of for - loop - statement */
+
+//        unified_sockets__send(sd, p, len);
+
+        printf("Server removed %s\n", p);
+        free(p);
 
 
         /* before checking the loop statement again, we have to call
@@ -164,6 +242,9 @@ int main(int argc, char *argv[])
             pthread_t t;
 
             /* executable statements */
+
+            /* first, push this new socket descriptor onto the list */
+            push_descriptor(newsd);
 
             /* creates a thread which takes care of the newly accepted
                  socket */
