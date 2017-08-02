@@ -22,6 +22,10 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2037003365" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1097060409" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.528305377" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
+								<option id="gnu.c.compiler.option.include.paths.843999368" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_queue/mod_queue}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.112076671" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1716054094" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base">
@@ -32,6 +36,10 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.728189440" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1061114218" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<option id="gnu.both.asm.option.include.paths.48421467" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_queue/mod_queue}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.269087670" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -44,13 +52,16 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="pro_virtual_controller_bus_BERKELEY_SOCKETS.null.1511659921" name="pro_virtual_controller_bus_BERKELEY_SOCKETS"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Default">
 			<resource resourceType="PROJECT" workspacePath="/pro_virtual_controller_bus_BERKELEY_SOCKETS"/>
 		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.909301629;cdt.managedbuild.toolchain.gnu.base.909301629.1687880006;cdt.managedbuild.tool.gnu.c.compiler.base.528305377;cdt.managedbuild.tool.gnu.c.compiler.input.112076671">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>

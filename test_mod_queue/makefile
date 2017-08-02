@@ -14,7 +14,7 @@ clean:
 	rm $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX)
 	rm main.o
 
-$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o
+$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): $(PROJECTNAME).o
 	gcc  -g -O0 -o $@ $^ -lpthread -lmod_queue -L../mod_queue -lmod_queue -L../mod_queue
 	
 %.o : %.c

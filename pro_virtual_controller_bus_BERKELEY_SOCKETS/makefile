@@ -12,9 +12,9 @@ all: $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX)
 
 clean:
 	rm $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX)
-	rm main.o
+	rm $(PROJECTNAME).o
 
-$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): main.o
+$(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): $(PROJECTNAME).o
 	gcc  -g -O0 -o $@ $^ -lpthread -lmod_unified_sockets_BERKELEY_SOCKETS -L../mod_unified_sockets_BERKELEY_SOCKETS -lmod_queue -L../mod_queue
 	
 %.o : %.c

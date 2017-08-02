@@ -10,7 +10,8 @@
 #include <pthread.h>
 
 /* projects' header files */
-#include "unified_sockets.h"
+#include <unified_sockets.h>
+#include <queue.h>
 
 void error(const char *msg)
 {
@@ -80,14 +81,62 @@ int echo_sync(int _fd)
     close(_fd);
 }
 
+/*!
+  \brief    thread starting point, which main target is to distribute incoming
+              messages to other peers
+
+  \param [in]       _p      argument
+  \return    return value
+ */
+void *broadcasting_messages(void *_p) {
+
+    /* loop forever */
+    while (1) {
+
+        /* automatic variables */
+        char *p; /* pointer to an incoming message */
+        int len, sd; /* length of message */
+
+        /* executable statements */
+        queue__remove_from(&sd, &p, &len);
+
+        /* set the the first descriptor */
+
+
+
+    } /* end of while - loop - statement */
+
+    return NULL;
+}
+
+/*!
+  \brief main function
+
+  starts the execution of the virtual controller bus server
+
+  \param []     argc        number of arguments
+  \param [in]   *argv[]     list of pointer to the arguments themselves
+  \return    socket descriptor [>=0] if successful
+ */
 int main(int argc, char *argv[])
 {
     /* automatic variables */
     int sd, newsd, ret, len;
-
-    printf("starting server\n");
+    pthread_t pth; /* pthread handle */
+    pthread_attr_t tattr; /* pthread attributes */
 
     /* executable statements */
+    printf("starting server\n");
+
+    /* initialize the attributes */
+    pthread_attr_init(&tattr);
+
+    /* before we start accepting incoming connections we have to start the
+         thread which takes care of the date to drop in and spreads them
+         to other ports*/
+    pthread_create(&pth, &tattr, broadcasting_messages, NULL);
+
+    /* open a socket */
     sd = unified_sockets__open();
     if (sd >= 0) {
 
@@ -100,10 +149,19 @@ int main(int argc, char *argv[])
         /* accept incoming connection */
         newsd = unified_sockets__accept(sd);
 
-        /* check, whehter it is equal or larger zero */
+        /* check, whether it is equal or larger zero */
         while (newsd) {
+
+            /* automatic variables */
             pthread_t t;
+
+            /* executable statements */
+
+            /* creates a thread which takes care of the newly accepted
+                 socket */
             pthread_create(&t, 0, echo, (void*)newsd);
+
+            /* wait for the next connection to pop up */
             newsd = unified_sockets__accept(sd);
         } /* end of while - loop - statement */
      }
