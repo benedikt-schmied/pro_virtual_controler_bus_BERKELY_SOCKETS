@@ -87,6 +87,6 @@ int main(int argc, char *argv[])
             } /* end of for - loop - statement */
         }
     }
-    shutdown(sd, 0);
+//    shutdown(sd, 0);
 }
 

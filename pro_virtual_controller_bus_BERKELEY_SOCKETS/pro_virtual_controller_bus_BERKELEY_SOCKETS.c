@@ -98,7 +98,7 @@ void* treat_incoming_message(void* param)
         /* push the message into the buffer */
         queue__add_to(s, buf, count);
 
-        printf("Server received %s\n", buf);
+        printf("received message on socket %i\n", s);
 
         count = unified_sockets__recv(s, buf, 1000);
     }
@@ -179,11 +179,12 @@ void *broadcasting_messages(void *_p) {
 
         } /* end of for - loop - statement */
 
-//        unified_sockets__send(sd, p, len);
+        /* just print a short debugging message */
+        printf("removed message on socket %i\n", sd);
 
-        printf("Server removed %s\n", p);
+        /* this storage has been allocated before, hence, free it, we do not
+             need it anymore */
         free(p);
-
 
         /* before checking the loop statement again, we have to call
              the remove from function */

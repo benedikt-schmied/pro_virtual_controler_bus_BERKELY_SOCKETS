@@ -49,7 +49,7 @@ int unified_sockets__open(void)
     if (ret < 0) {
         printf("WSAStartup failed: %d\n", ret);
     } else {
-        printf("socket successfully opened");
+        printf("socket successfully opened\n");
     }
 
     /* return the 'ret' variable which may contain the
@@ -233,4 +233,20 @@ int unified_sockets__recv(int _sd, char *_p, int _len)
         ret = -1;
     }
     return ret;
+}
+
+/*!
+  \brief closes a socket, no matter whether it sends, receives or does both
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    (maximum) length of buffer
+  \return successful if equal zero
+ */
+int unified_sockets__close(int _sd)
+{
+	/* automatic variables */
+
+	/* executable statements */
+	shutdown(_sd, SD_BOTH);
+	return 0;
 }

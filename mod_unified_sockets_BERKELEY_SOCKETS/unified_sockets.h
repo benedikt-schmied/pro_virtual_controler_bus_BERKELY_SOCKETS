@@ -73,5 +73,14 @@ int unified_sockets__send(int _sd, char *_p, int _len);
  */
 int unified_sockets__recv(int _sd, char *_p, int _len);
 
+/*!
+  \brief closes a socket, no matter whether it sends, receives or does both
+  \param []        _sd        socket descriptor
+  \param [in]    *_p        buffer
+  \param []        _len    (maximum) length of buffer
+  \return successful if equal zero
+ */
+int unified_sockets__close(int _sd);
+
 #endif /* VA_APP_TEST_BUS_MASTER_BERKELY_SOCKETS_UNIFIED_SOCKETS_H_ */
 
