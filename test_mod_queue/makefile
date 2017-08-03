@@ -15,7 +15,7 @@ clean:
 	rm main.o
 
 $(EXECUTABLEPREFIX)$(PROJECTNAME)$(EXECUTABLESUFFIX): $(PROJECTNAME).o
-	gcc  -g -O0 -o $@ $^ -lpthread -lmod_queue -L../mod_queue -lmod_queue -L../mod_queue
+	gcc  -g -O0 -o $@ $^ -lmod_queue -lpthread -L../mod_queue -lmod_queue -L../mod_queue
 	
 %.o : %.c
 	gcc -c -g -O0 -o $@ -I. -I../mod_queue $^

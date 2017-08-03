@@ -18,11 +18,11 @@
 					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.909301629.1687880006" name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.base.1533197196" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1489508799" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-							<builder buildPath="${workspace_loc:/pro_virtual_controller_bus_BERKELEY_SOCKETS/pro_virtual_controller_bus_BERKELEY_SOCKETS}" id="cdt.managedbuild.target.gnu.builder.base.32899343" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<builder arguments="-f makefile_win" buildPath="${workspace_loc:/pro_virtual_controller_bus_BERKELEY_SOCKETS/pro_virtual_controller_bus_BERKELEY_SOCKETS}" command="make" id="cdt.managedbuild.target.gnu.builder.base.32899343" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2037003365" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1097060409" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.528305377" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
-								<option id="gnu.c.compiler.option.include.paths.843999368" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.c.compiler.option.include.paths.843999368" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_queue/mod_queue}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}&quot;"/>
 								</option>
@@ -36,7 +36,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.728189440" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1061114218" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-								<option id="gnu.both.asm.option.include.paths.48421467" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="gnu.both.asm.option.include.paths.48421467" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_queue/mod_queue}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}&quot;"/>
 								</option>

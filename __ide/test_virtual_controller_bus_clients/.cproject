@@ -18,7 +18,7 @@
 					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.1058984749.1591054708" name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.base.602741531" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1047277733" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-							<builder buildPath="${workspace_loc:/test_virtual_controller_bus_clients/test_virtual_controller_bus_clients}" id="cdt.managedbuild.target.gnu.builder.base.110752197" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<builder arguments="-f makefile_win" buildPath="${workspace_loc:/test_virtual_controller_bus_clients/test_virtual_controller_bus_clients}" command="make" id="cdt.managedbuild.target.gnu.builder.base.110752197" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1278400213" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.826890532" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1833704308" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">

@@ -18,7 +18,7 @@
 					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.523750193.1630754011" name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.base.1600281702" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.1043538916" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
-							<builder buildPath="${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}" id="cdt.managedbuild.target.gnu.builder.base.1470300282" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<builder arguments="-f makefile_win" buildPath="${workspace_loc:/mod_unified_sockets_BERKELEY_SOCKETS/mod_unified_sockets_BERKELEY_SOCKETS}" command="make" id="cdt.managedbuild.target.gnu.builder.base.1470300282" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.275762089" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.847145950" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.554485195" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
