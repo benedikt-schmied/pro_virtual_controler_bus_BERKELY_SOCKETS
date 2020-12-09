@@ -112,28 +112,32 @@ void* treat_incoming_message(void* param)
     /* executable statements */
 
 //    pthread_detach(pthread_self());
-    printf("starting echo thread\n");
+    fprintf(stdout, "starting echo thread\n");
 
     count = unified_sockets__recv(s, buf, 1024);
-    printf("count %i and file descriptor %i\n", count, s);
+    fprintf(stdout, "count %i and file descriptor %i\n", count, s);
+    fflush(stdout);
 
     while (count > 0) {
 
         /* push the message into the buffer */
         queue__add_to(s, buf, count);
 
-        printf("received message on socket %i\n", s);
+        fprintf(stdout, "received message on socket %i\n", s);
+        fflush(stdout);
 
         count = unified_sockets__recv(s, buf, 1000);
     }
     if (count < 0) {
-        printf("recv error: %s\n", strerror(errno));
+        fprintf(stdout, "recv error: %s\n", strerror(errno));
+        fflush(stdout);
     }
 
-
-    printf("closing connection\n");
+    fprintf(stdout, "closing connection\n");
+    fflush(stdout);
 
     close(s);
+    return NULL;
 }
 
 int echo_sync(int _fd)
@@ -146,22 +150,26 @@ int echo_sync(int _fd)
     /* executable statements */
 
     count = unified_sockets__recv(_fd, buf, 1000);
-    printf("count %i and file descriptor %i\n", count, _fd);
+    fprintf(stdout, "count %i and file descriptor %i\n", count, _fd);
 
     while (count >= 0) {
 
-        printf("Server received %s\n", buf);
-        printf("Server sending it back\n");
+        fprintf(stdout, "Server received %s\n", buf);
+        fprintf(stdout, "Server sending it back\n");
+        fflush(stdout);
         unified_sockets__send(_fd, buf, strlen(buf));
 
         count = unified_sockets__recv(_fd, buf, 1000);
     }
     if (count < 0) {
-        printf("recv error: %s\n", strerror(errno));
+        fprintf(stdout, "recv error: %s\n", strerror(errno));
+        fflush(stdout);
     }
-    printf("closing connection\n");
+    fprintf(stdout, "closing connection\n");
+    fflush(stdout);
 
     close(_fd);
+    return 0;
 }
 
 /*!
@@ -204,7 +212,8 @@ void *broadcasting_messages(void *_p) {
         } /* end of for - loop - statement */
 
         /* just print a short debugging message */
-        printf("removed message on socket %i\n", sd);
+        fprintf(stdout, "removed message on socket %i\n", sd);
+        fflush(stdout);
 
         /* this storage has been allocated before, hence, free it, we do not
              need it anymore */
@@ -234,7 +243,8 @@ int main(int argc, char *argv[])
     pthread_attr_t tattr; /* pthread attributes */
 
     /* executable statements */
-    printf("starting server\n");
+    fprintf(stdout, "starting server\n");
+    fflush(stdout);
 
     /* we need to startup the queue */
     queue__open();
@@ -259,6 +269,7 @@ int main(int argc, char *argv[])
 
         /* accept incoming connection */
         newsd = unified_sockets__accept(sd);
+        fflush(stdout);
 
         /* check, whether it is equal or larger zero */
         while (newsd) {
