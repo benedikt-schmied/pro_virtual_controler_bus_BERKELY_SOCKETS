@@ -200,7 +200,8 @@ int queue__add_to(int _sd, char *_p, int _len)
 }
 
 /*!
-  \brief add to the tail of a queue
+  \brief remove item from the queue
+
   \param []     *_sd        socket descriptor
   \param [out]  **_p    address of the payload pointer
   \param [out]  *_len    address of length of data
@@ -248,6 +249,8 @@ int queue__remove_from(int *_sd, char **_p, int *_len)
         *_p     = item->payload;
         *_len   = item->len;
         *_sd    = item->sd;
+
+        free(item);
         return 0;
     } else {
         *_p     = NULL;
